@@ -1,0 +1,14 @@
+{# app/Resources/views/static/cv.html.twig #}
+
+{# On hérite de notre vue de base #}
+{% extends "::base.html.twig" %}
+
+{# On redefini notre contenu #}
+{% block page_content %}
+    <article id="cvPdf">
+        <div class="row">
+            <iframe class="hidden-xs col-sm-12" src="/documents/DUFRESNE_Jonathan_cv.pdf" width="800px" height="600px"></iframe>
+            <p class="visible-xs">Résolution trop petite pour afficher le cv. Pour le telecharger cliquer <a target="_blank" href="{{ path("cv") }}">ici</a></p>
+        </div>
+    </article>
+{% endblock %}

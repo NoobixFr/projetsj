@@ -1,0 +1,186 @@
+{# src/BackendBundle/Resources/views/default/index.html.twig #}
+
+{# On hérite de notre vue de base #}
+{% extends "BackendBundle::backend_base.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-pencil fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">Articles</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left"><a href="{{ path("create_article") }}">Ecrire un article</a></span>
+                            <span class="badge badge-primary pull-right"><i class="fa fa-pencil"></i></span>
+                            <div class="clearfix"></div>
+                            <span class="pull-left"><a href="{{ path("backend_show_articles") }}">Voir les articles</a></span>
+                            <span class="badge badge-primary pull-right"><i class="fa fa-bars"></i></span>
+                            <div class="clearfix"></div>
+                            <span class="pull-left"><a href="{{ path("show_new_comment") }}">Nouveau(x) commentaire(s)</a></span>
+                            <span class="badge badge-primary pull-right">{{ numberOfNewComments }}</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <strong>Catégories</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="col-xs-offset-3 col-xs-3">
+                            <button id="js_addNewCategory" class="btn btn-primary" title="ajouter une catégorie"><i class="fa fa-tag"></i></button>
+                        </div>
+                        <div class="col-xs-3">
+                            <a href="{{ path("show_categories") }}" class="btn btn-primary" title="ajouter une catégorie"><i class="fa fa-th-list" ></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-user fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">Utilisateurs</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">Voir Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {#
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">124</div>
+                            <div>New Orders!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-support fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">13</div>
+                            <div>Support Tickets!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        #}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('document').ready(function(){
+
+            {# pop-up ajout d'une categorie #}
+            $('#js_addNewCategory').click(function(){
+
+                {# On personalise la modal #}
+                $('.modal-header').attr("class","modal-header modal-header-primary");
+                $('#pjModalHeader').html('<h2><i class="fa fa-tag"></i> Ajout d\'une catégorie</h2>');
+                $('#pjModalBody').html(
+                        '<div class="row">' +
+                        '<div id="js_addCategoryErrorMessage" class="col-xs-12"></div>' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<form class="form-inline" role="form">' +
+                        '<label for="addCategory">Nom de la catégorie </label> ' +
+                        '<input id="addCategory" class="form-control" type="text" placeholder="Saisir un nom"/>' +
+                        '</form>' +
+                        '</div>');
+                $('#pjModalFooter').html(
+                        '<button id="js_addCategory" type="button" class="btn btn-primary">Ajouter</button> ' +
+                        '<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>');
+
+                {# On bind un evenement sur le bouton d'ajout #}
+                $('body').on('click','#js_addCategory', function(){
+
+                    {# On recupere la valeur de l'input #}
+                    var nameCategory = $('#addCategory').val();
+                    console.log("envoie de la requête ajax avec pour parametre : " + nameCategory)
+                    {# On execute la requête ajax avec le nom à saisir #}
+                    $.ajax({
+                        url : '{{ path("backend_create_categories") }}',
+                        type : 'POST',
+                        data : 'name=' + nameCategory,
+                        success : function(){
+                            {# Ajouter les actions à faire #}
+                            $('#js_pjModal').modal('hide');
+                        },
+                        error : function(errorResponse){
+                            $.each($.parseJSON(errorResponse.responseText), function(key, value){
+                                $('#js_addCategoryErrorMessage').html('<div class="alert alert-danger" >' +
+                                        '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                                         value +
+                                        '</div>');
+                                console.log(value);
+                            });
+                        }
+                    });
+
+                });
+
+                {# on force l'ouverture de la modal #}
+                $('#js_pjModal').modal();
+            });
+        });
+    </script>
+
+{% endblock %}

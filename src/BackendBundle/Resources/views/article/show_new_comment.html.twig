@@ -1,0 +1,49 @@
+{# src/BackendBundle/Resources/views/article/create_articles.html.twig #}
+
+{# On hérite de notre vue de base #}
+{% extends "BackendBundle::backend_base.html.twig" %}
+
+{% block  backend_page_title%}
+    liste des nouveaux commentaires
+{% endblock %}
+
+{% block content %}
+
+    <section class="jumbotron">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>E-mail</th>
+                <th>Titre de l'article</th>
+                <th>Contenu</th>
+                <th>Date de création</th>
+                <th>Publié</th>
+                <th>En savoir plus</th>
+            </tr>
+            </thead>
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.id }}</td>
+                    <td>{{ comment.username }}</td>
+                    <td>{{ comment.mail }}</td>
+                    <td>{{ comment.article.title }}</td>
+                    <td>{{ comment.content| truncate(40, false, '...') }}</td>
+                    <td>{{ comment.createdAt|date("d/m/Y") }}</td>
+                    <td>
+                        {% if comment.published == true %}
+                            <button class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+                        {% else %}
+                            <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        {%  endif %}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path("show_comment", { 'id': comment.id }) }}">voir <i class="fa fa-plus" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{# app/Resources/views/widget/meteo.html.twig #}
+
+{# affichage du widget de la meteo#}
+{% if meteo %}
+
+<div class="col-xs-offset-2 hidden-xs col-sm-2 col-md-2 col-lg-2">
+    <div id="widget_meteo" class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ meteo.city_info.name }}</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <img alt="temp" src="{{ meteo.current_condition.icon }}">
+                <span class="widget_meteo_temperature">{{ meteo.current_condition.tmp }} °c</span>
+                <br>
+                <span class="widget_meteo_condition">{{ meteo.current_condition.condition }}</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+    <div class="col-xs-offset-2 hidden-xs col-sm-2 col-md-2 col-lg-2">
+        <div id="widget_meteo" class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Indisponible</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                   La météo n'est pas disponible.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+

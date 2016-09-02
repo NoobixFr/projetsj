@@ -1,0 +1,19 @@
+backend:
+    resource: "@BackendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+connexion_check:
+    path: /connexion_check
+
+logout:
+    path: /logout

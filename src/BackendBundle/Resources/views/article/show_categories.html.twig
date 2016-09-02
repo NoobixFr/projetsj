@@ -1,0 +1,75 @@
+{# app/Resources/views/article/show_categories.html.twig #}
+
+{# On hérite de notre vue de base #}
+{% extends "BackendBundle::backend_base.html.twig" %}
+
+{% block admin_page_title %}
+    Liste des catégories.
+{% endblock %}
+
+{% block content %}
+    <h2>Tableau des catégories</h2>
+
+    <section>
+        <div class="col-xs-3">
+            <table class="table table-responsive table-striped table-bordered">
+                {# définition de l'entête #}
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Suppression</th>
+                </tr>
+                </thead>
+
+                {# Insertion du contenu #}
+                <tbody>
+                {%  for category in categories %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <button data-id="{{ category.id }}" class="btn btn-danger js_delete_category">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6"> Pas de catégories</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $("body").on("click", ".js_delete_category",function(){
+
+                var deleteCategoryButton = $(this);
+                var idCategory = deleteCategoryButton.data("id");
+                $.ajax($.ajax({
+                    method: "POST",
+                    url: "{{ path("delete_category") }}",
+                    data: { id : idCategory },
+                    success:  function(result){
+                        Location.refresh();
+                    },
+                    error: function(error){
+                        console.log(error)
+                    }
+                }))
+            });
+        })
+
+    </script>
+
+{% endblock %}

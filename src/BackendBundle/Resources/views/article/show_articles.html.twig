@@ -1,0 +1,94 @@
+{# app/Resources/views/article/show_articles.html.twig #}
+
+{# On hérite de notre vue de base #}
+{% extends "BackendBundle::backend_base.html.twig" %}
+
+{% block admin_page_title %}
+    Liste des articles.
+{% endblock %}
+
+{% block content %}
+    <h2>Tableau des articles</h2>
+
+    <section>
+        <table class="table table-responsive table-striped table-bordered">
+            {# définition de l'entête #}
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                    <th>Date de création</th>
+                    <th>Date de mise à jour</th>
+                    <th>Publication</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            {# Insertion du contenu #}
+            <tbody>
+            {%  for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.content|raw }}</td>
+                <td class="text-center">{{ article.createdAt|date("d-m-Y") }}</td>
+                <td class="text-center">{{ article.updatedAt|date("d-m-Y") }}</td>
+                <td class="text-center">
+                    {% if article.published == true %}
+                        <button data-id="{{ article.id }}" class="btn btn-success js_toggle_published"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    {% else %}
+                        <button data-id="{{ article.id }}" class="btn btn-danger js_toggle_published"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    <a href="{{ path('backend_show_article', {'id': article.id}) }}" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="{{ path('backend_delete_article', {'id': article.id}) }}" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6"> Pas d'articles</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $("body").on("click", ".js_toggle_published",function(){
+                console.log("toogle");
+                var articleButton = $(this);
+                var idArticle = articleButton.data("id");
+                $.ajax($.ajax({
+                    method: "POST",
+                    url: "{{ path("change_state_published") }}",
+                    data: { id : idArticle },
+                    dataType : "json",
+                    success:  function(result){
+                        console.log(result)
+                        if(result.state == true){
+                            articleButton.attr("class", "btn btn-success js_toggle_published");
+                            articleButton.text("Publié");
+                        }else{
+                            articleButton.attr("class", "btn btn-danger js_toggle_published");
+                            articleButton.text("Non publié");
+                        }
+                    },
+                    error: function(error){
+                        console.log(error)
+                    }
+                }))
+            });
+        })
+
+    </script>
+
+{% endblock %}

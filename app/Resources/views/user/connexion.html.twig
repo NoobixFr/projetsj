@@ -1,0 +1,60 @@
+{# app/Resources/views/user/connexion.html.twig #}
+
+{# On hérite de notre vue de base #}
+{% extends "::base.html.twig" %}
+
+{# On redefini notre contenu #}
+{% block page_content %}
+    <article id="loginbox" class="mainbox col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6">
+        <div class="panel panel-default" >
+            <div class="row">
+                <div class="col-xs-offset-3 col-xs-6">
+                   {# <img src="{{ asset('assets/images/logo_cg_gers.jpg') }}" alt="Logo gers" class="img-responsive img-thumbnail"> #}
+                    <h2 class="text-center">Connexion</h2>
+                </div>
+            </div>
+
+            {% if error %}
+                <div class="row">
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <p class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>Attention !</strong> Erreur d'authentification.
+                        </p>
+                    </div>
+                </div>
+            {%  endif %}
+
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <form action="{{ path('connexion') }}" method="post" id="form_connexion" class="form-horizontal">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}" placeholder="Nom d'utilisateur" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" id="password" class="form-control" name="_password" placeholder="Mot de passe"/>
+                                </div>
+                            </div>
+
+                            {# Protection contre les failles de type CSRF #}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <div class="form-group">
+                                <!-- Button -->
+                                <div id="submit_connexion" class="col-sm-12">
+                                    <button  type="submit" href="#" class="btn btn-primary"><i class="glyphicon glyphicon-log-in"></i> Ouvrir la session</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}
+

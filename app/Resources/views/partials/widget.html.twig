@@ -1,0 +1,19 @@
+<div class="row">
+
+    {# Appelle de la méthode charger de récupérer la météo via un web-service #}
+    {{ render(controller('AppBundle:Widget:widgetMeteo')) }}
+
+    {# Affichage du widget horloge #}
+    <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
+        <div id="widget_horloge" class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    {{ 'now' | localizeddate('full', 'none') }}
+                </h3>
+            </div>
+            <div class="panel-body">
+                <p id="heureWidgetHorloge"> timer </p>
+            </div>
+        </div>
+    </div>
+</div>

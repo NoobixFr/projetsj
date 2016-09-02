@@ -1,0 +1,50 @@
+# app/config/security.yml
+security:
+
+    # Définition de l'encodage utilisé pour crypter les mots de passe.
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        UserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 13
+
+    # Définition des roles pour l'application
+    role_hierarchy:
+        ROLE_AUTHOR: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_AUTHOR, ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_AUTHOR, ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # Définition de la manière dont sont récupéré les utilisateurs.
+    providers:
+        main:
+            entity:
+                class: UserBundle\Entity\User
+                property: username
+
+    # Définition des pare feu
+    firewalls:
+
+        # Pare feu de l'environement de dev
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        #Pare feu du front-end
+        front_app_firewall:
+           pattern:   ^/
+           anonymous: true
+           provider: main
+           form_login:
+               login_path: connexion
+               check_path: connexion
+               csrf_token_generator: security.csrf.token_manager
+           logout:
+               path: /logout
+               target: /
+               invalidate_session: true
+
+
+    # Définition des droits d'accès à l'application
+    access_control:
+      - { path: ^/connexion$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/secured, roles: ROLE_ADMIN }

@@ -1,0 +1,160 @@
+{# app/Resources/views/article/show_article.html.twig #}
+
+{# On hérite de notre vue de base #}
+{% extends "::base.html.twig" %}
+
+{# On redefini notre contenu #}
+{% block page_content %}
+<section id="showArticle" xmlns="http://www.w3.org/1999/html">
+    {# On affiche notre article #}
+    <article id="articleContent">
+        <div class="row" >
+            <div class="col-xs-offset-1 col-xs-10">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="text-center">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h3 class="pull-left">{{ article.title }}</h3>
+                                </div>
+                                <div class="col-sm-3">
+                                    <h4 class="pull-right">
+                                        <small><em>{{ article.createdAt|date("d/m/Y") }}</em></small>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {{ article.content|raw }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "panel-footer">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <i class="fa fa-tags" aria-hidden="true"></i>
+                                {% for categorie in article.categories %}
+                                    {% if loop.last %}
+                                        {{ categorie.name }}
+                                    {% else %}
+                                        {{ categorie.name }} /
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    {# Rendu par onglets #}
+    <article class="article-comments">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1" id="login">
+
+                <div class="page-header">
+                    <h3 class="reviews">Laisser un commentaire</h3>
+                </div>
+
+                <div class="comment-tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#commentsPane" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Commentaires</h4></a></li>
+                        <li><a href="#addCommentPane" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Ajouter votre commentaire</h4></a></li>
+                    </ul>
+
+                    {# Onglet d'affichage des commentaires#}
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="commentsPane">
+                            <ul class="media-list">
+                                {% for comment in comments %}
+                                    <li class="media">
+                                        {% if loop.index is divisibleby(2) %}
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object img-circle profil-image" src="{{ asset('images/default_profils.jpg') }}" alt="profile">
+                                            </a>
+                                        {% else %}
+                                            <a class="pull-right" href="#">
+                                                <img class="media-object img-circle profil-image" src="{{ asset('images/default_profils.jpg') }}" alt="profile">
+                                            </a>
+                                        {% endif %}
+
+                                        <div class="media-body">
+                                            <div class="well well-lg">
+                                                <h4 class="media-heading text-uppercase reviews">{{ comment.username }}</h4>
+                                                <ul class="media-date text-uppercase reviews list-inline">
+                                                    <li class="dd">{{ comment.createdAt|date("d") }}</li>
+                                                    <li class="mm">{{ comment.createdAt|date("m") }}</li>
+                                                    <li class="aaaa">{{ comment.createdAt|date("Y") }}</li>
+                                                </ul>
+                                                <p class="comment-content">
+                                                    {{ comment.content }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% else %}
+                                    <p>Pas encore de commentaire pour cet article.</p>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        {# Onglet d'ajout des commentaire #}
+                        <div class="tab-pane" id="addCommentPane">
+
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+                            {{ form_errors(form) }}
+
+                            <div class="form-group">
+                                {{ form_label(form.username, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_errors(form.username) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.mail, "Mail", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_errors(form.mail) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.content, "Commentaire", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                {{ form_errors(form.content) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_errors(form.content) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                                </div>
+                            </div>
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+{% endblock %}
