@@ -2,10 +2,20 @@
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
 #    parameter_name: value
+    meteo.city: Toulouse # Paramètrage de la ville pour le widget de la meteo
 
 services:
-     app.meteo:
-        class: AppBundle\Meteo\Meteo
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    # Permet d'utiliser truncate et wordwrap sur les variable text twig
+      twig.extension.text:
+         class: Twig_Extensions_Extension_Text
+         tags:
+              - { name: twig.extension }
+      # Permet de localiser la date avec les extension twig
+      twig.extension.intl:
+          class: Twig_Extensions_Extension_Intl
+          tags:
+              - { name: twig.extension }

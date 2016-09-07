@@ -1,22 +1,28 @@
 {# app/Resources/views/base.html.twig #}
-<!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block metadata %} {% endblock %}
+
     <title>{% block title %}{{ main_title }}{% endblock %}</title>
+
     {% block stylesheets %}
 
         {# Inclusion des fonts de google #}
         <link href="https://fonts.googleapis.com/css?family=Oswald|Tangerine" rel="stylesheet">
 
-        {% stylesheets filter="cssrewrite,scssphp," output="css/app.css"
-            "assets/scss/_bootstrap.scss"
-            "assets/scss/font-awesome.scss"
-            "assets/scss/app.scss"
+        {% stylesheets filter="cssrewrite,scssphp," output="css/app2.css"
+        "assets/scss/_bootstrap.scss"
+        "assets/scss/font-awesome.scss"
+        "assets/scss/app2.scss"
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+
     {% endblock %}
+
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon2.ico') }}" />
 
     <!-- Use Internet Explorer 10 Standards mode -->
@@ -30,85 +36,83 @@
     <![endif]-->
 </head>
 <body>
+
 {% block body %}
+
+    {# Inclusion du menu de navigation à partir des partials #}
     {% block nav_menu %}
-        {# Inclusion du menu de navigation à partir des partials #}
         {% include 'partials/nav_menu.html.twig' %}
     {% endblock %}
 
-    {% block header %}
-        {# Inclusion du header à partir des partials #}
-        {% include 'partials/header.html.twig' %}
-    {% endblock %}
+    {# Inclusion du contenu du site #}
+    <div class="container-fluid">
+
+        {% block header %}
+            {# Inclusion du header à partir des partials #}
+            {% include 'partials/header.html.twig' %}
+        {% endblock %}
+
+        {% block content %}
+
+            <section class="row">
+                <div class="col-xs-12">
+                    {# Inclusion des widget à partir des partials #}
+                    {% block widget %}
+                        {% include 'partials/widget.html.twig' %}
+                    {% endblock %}
+
+                    {# Inclusion du block des messages flash #}
+                    {% block flash_message %}
+                        {% include 'partials/flashmessage.html.twig' %}
+                    {% endblock %}
+
+                    {% block page_content %}
+                        {# Block à redefinir en fonction du contenu de la page souhaité #}
+                    {% endblock %}
+
+                </div>
+            </section>
+
+        {% endblock %}
+
+        {%  block footer %}
+            {% include 'partials/footer.html.twig' %}
+        {%  endblock %}
+    </div>
 
 
 
-    {% block content %}
+{% block javascripts %}
+    {% javascripts filter="?jsqueeze" output="js/app.js"
+    "assets/js/jquery.js"
+    "assets/js/bootstrap.js"
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 
-        <section>
-            {# Bloc pour l'affichage des messages flash #}
-            {% block flash_message %}
-
-                {% for flash_message in app.session.flashBag.get('notice') %}
-                    <div class="alert alert-success">
-                        <strong>Success !</strong>  {{ flash_message }}
-                    </div>
-                {% endfor %}
-
-                {% for flash_message in app.session.flashBag.get('danger') %}
-                    <div class="alert alert-danger">
-                        <strong>Alerte !</strong>  {{ flash_message }}
-                    </div>
-                {% endfor %}
-
-            {% endblock %}
-
-            {% block widget %}
-                {# Inclusion des widget à partir des partials #}
-                {% include 'partials/widget.html.twig' %}
-            {% endblock %}
-
-            {% block page_content %}
-                {# Block à redefinir en fonction du contenu de la page souhaité #}
-            {% endblock %}
-        </section>
-
-    {% endblock %}
-
-    {% block footer %}
-        {# Inclusion du footer à partir des partials #}
-        {% include 'partials/footer.html.twig' %}
-    {% endblock %}
-
-    {% block javascripts %}
-        {% javascripts filter="?jsqueeze" output="js/app.js"
-        "assets/js/jquery.js"
-        "assets/js/bootstrap.js"
-        %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-
-        <script>
-            $('document').ready(function(){
-                $(function() {
-                    function horloge(){
-                        var hms = new Date();
-                        var h, m, s;
-                        h = hms.getHours();
-                        if (h<10) h = "0" + h;
-                        m = hms.getMinutes();
-                        if (m<10) m = "0" + m;
-                        s = hms.getSeconds();
-                        if (s<10) s = "0" + s;
-                        hours = $('#heureWidgetHorloge').html(h + ' h ' + m + ' min ' + s);
-                        console.log(hours);
-                    }
-                    setInterval(horloge,1000);
-                });
+    <script>
+        $('document').ready(function(){
+            $(function() {
+                function horloge(){
+                    var hms = new Date();
+                    var h, m, s;
+                    h = hms.getHours();
+                    if (h<10) h = "0" + h;
+                    m = hms.getMinutes();
+                    if (m<10) m = "0" + m;
+                    s = hms.getSeconds();
+                    if (s<10) s = "0" + s;
+                    hours = $('#heureWidgetHorloge').html(h + ' h ' + m + ' min ' + s);
+                    console.log(hours);
+                }
+                setInterval(horloge,1000);
             });
+        });
 
-        </script>
-    {% endblock %}
+    </script>
 {% endblock %}
+
+{% endblock %}
+
 </body>
 </html>

@@ -6,7 +6,7 @@
  * Time: 14:22
  */
 
-namespace UserBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;

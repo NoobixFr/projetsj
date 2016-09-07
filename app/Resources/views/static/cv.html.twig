@@ -5,16 +5,25 @@
 
 {# On redefini notre contenu #}
 {% block page_content %}
-    <article id="cvHtml" class="hidden-xs">
-        <div id="titre_cv" class="row">
-            <div class="col-sm-offset-2 col-md-offset-3 ">
-                <h2 class="nom_cv">Jonathan</h2>
-                <h3 class="titre_cv">DUFRESNE</h3>
+    <article id="cvContent" class="row">
+
+
+        <div class="hidden-xs col-xs-12">
+
+            {# En-tête du cv #}
+            <div id="cvHeader" class="row">
+                <div class="col-sm-offset-2  col-md-offset-3">
+                    <h2 id="cvFirstname">Jonathan</h2>
+                    <h2 id="cvLastname">DUFRESNE</h2>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div  class="hidden-xs col-sm-2 col-md-3 col-lg-3">
-                <div id="cv_aside">
+
+
+            <div id="cvContent" class="row">
+
+                {# aside du cv #}
+                <div id="cvAside" class="hidden-xs col-sm-3">
+
                     <p id="information_personelle">
                         27 ans<br>
                         célibataire<br>
@@ -46,140 +55,155 @@
                         <li>Jo Verclock</li>
                         <li>Derek Banas (EN)</li>
                     </ul>
+
                 </div>
+
+                {# corps du cv#}
+                <div id="cvSection" class="hidden-xs col-sm-9">
+
+                    <h2 id="cvTitle" class="row">Concepteur Développeur Informatique</h2>
+
+                    <h3 id="competenceTitle" class="row">Compétences</h3>
+                    <div id="competenceSection" class="row">
+                        <div class="col-sm-6">
+                            <p>
+                                <span>Langages </span><br>
+                                HTML5/CSS3 - Sass - JavaScript - PHP5-POO - Java - SQL
+                            </p>
+                            <p>
+                                <span>Frameworks</span> <br>
+                                Bootstrap - JQuery - Symfony - CodeIgniter
+                            </p>
+                            <p>
+                                <span>SGBD</span> <br>
+                                MySQL - PgSQL - Oracle - Access
+                            </p>
+                            <p>
+                                <span>IDE</span> <br>
+                                PhpStorm - Eclipse - Netbeans - Android Studio
+                            </p>
+                            <p>
+                                <span>Langue</span> <br>
+                                Anglais (lire et exploiter une documentation)
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <span>Système d'exploitation</span> <br>
+                                Microsoft windows - Ubuntu
+                            </p>
+                            <p>
+                                <span>Gestion de projet</span> <br>
+                                PERT - GANTT - Méthode Agile
+                            </p>
+                            <p>
+                                <span>Developpement mobile</span> <br>
+                                Androïd
+                            </p>
+                            <p>
+                                <span>logiciels</span> <br>
+                                Notepad++ - Sublime text - Wamp/Lamp - Suite bureautique Libre Office
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 id="formationTitle" class="row">Formations</h3>
+                    <div id="formationSection" class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-3"><span>2015-2016 (1 an)</span></div>
+                                <p class="col-lg-9">Concepteur Développeur Informatique (Niveau II/BAC+4) à l’AFPA de Toulouse - Balma</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3"><span>2008-2009 (8 mois)</span></div>
+                                <p class="col-lg-9">Obtention du titre de Développeur Logiciel (Niveau III/BAC+2) à l’AFPA de Toulouse - Palays</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3"><span>2006 - 2008</span></div>
+                                <p class="col-lg-9">Premiere année d'IUT Statistique et Traitement Informatique des Données</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3"><span>2006</span></div>
+                                <p class="col-lg-9">Bac Scientifique option physique chimie</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 id="experienceTitle" class="row">Expériences</h3>
+                    <div id="experienceSection" class="row">
+                        <div class="col-sm-12">
+                            <h4 class="subSectionExperience">En informatique</h4>
+                            <div class="row">
+                                <div class="col-lg-3 date_experience">2016 (3 mois)</div>
+                                <p class="col-lg-9">
+                                    <span class="information_complementaire"><span class="fonction">Développeur - Symfony</span> - Conseil Départemental du Gers - Auch</span><br>
+                                    Conception et Réalisation d'un logiciel de GPAO.<br>
+                                    Modélisation de la base de données en utilisant la méthode Merise.<br>
+                                    Modélisation de l'application en utilisant UML.<br>
+                                    Codage de l'application en utilisant le framework Symfony 3. <br>
+                                    <br>
+                                </p>
+                                <div class="col-lg-3 date_experience">2009 (3 mois)</div>
+                                <p class="col-lg-9">
+                                    <span class="information_complementaire"><span class="fonction">Développeur</span> - AP Formation - TOULOUSE</span><br>
+                                    Modélisation de l’application de gestion de QCM à partir du cahier des charges
+                                    en utilisant UML.<br>
+                                    Modélisation de la base de données en utilisant la méthode Merise.<br>
+                                    Ecriture des scripts de création et de modificationet écriture des jeux
+                                    de test en SQL pour la base de données MySQL.<br>
+                                    <br>
+                                </p>
+                                <div class="col-lg-3 date_experience" >2008 (1 mois)</div>
+                                <p class="col-lg-9">
+                                    <span class="information_complementaire"><span class="fonction">Développeur</span> - Collège les Fontanilles - Castelnaudary</span><br>
+                                    Refonte du site internet en HTML/CSS.<br>
+                                    <br>
+                                </p>
+                                <div class="col-lg-3 date_experience" >2007 (1 mois)</div>
+                                <p class="col-lg-9">
+                                    <span class="information_complementaire"><span class="fonction">Développeur</span> - AMD Informatique - Carcassonne</span><br>
+                                    Création d’un site internet en HTML/CSS pour une application de gestion d’évènement sportifs.<br>
+                                    <br>
+                                </p>
+                            </div>
+
+                            <h4 class="subSectionExperience">Autres Secteurs</h4>
+                            <div class="row">
+                                <div class="col-lg-3 date_experience">2011 - 2012 (7 mois)</div>
+                                <p class="col-lg-9">
+                                    Equipier de station service chez Dyneff Arzens Nord<br>
+                                    <br>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 date_experience">2011 (1 mois)</div>
+                                <p class="col-lg-9">
+                                    Agent de blanchisserie chez Ellis Lanquedoc Roussillon<br>
+                                    <br>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 date_experience">2010 (2 mois)</div>
+                                <p class="col-lg-9">
+                                    Emploi saisonnier chez KWS France<br>
+                                    <br>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 date_experience">2008 (1 mois)</div>
+                                <p class="col-lg-9">
+                                    Employé du service technique à la Mairie d’Alairac<br>
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div id="cv_content" class="col-sm-10 col-md-9 col-lg-9">
-                <h1 class="titre_cv">Concepteur Développeur Informatique</h1>
-                <h4 id="titre_rubrique_competence">Compétence</h4>
-                <div id="rubrique_competence" class="row">
-                    <div class="col-sm-6">
-                        <p>
-                            <span>Langages </span><br>
-                            HTML5/CSS3 - Sass - JavaScript - PHP5-POO - Java - SQL
-                        </p>
-                        <p>
-                            <span>Frameworks</span> <br>
-                            Bootstrap - JQuery - Symfony - CodeIgniter
-                        </p>
-                        <p>
-                            <span>SGBD</span> <br>
-                            MySQL - PgSQL - Oracle - Access
-                        </p>
-                        <p>
-                            <span>IDE</span> <br>
-                            PhpStorm - Eclipse - Netbeans - Android Studio
-                        </p>
-                        <p>
-                            <span>Langue</span> <br>
-                            Anglais (lire et exploiter une documentation)
-                        </p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p>
-                            <span>Système d'exploitation</span> <br>
-                            Microsoft windows - Ubuntu
-                        </p>
-                        <p>
-                            <span>Gestion de projet</span> <br>
-                            PERT - GANTT - Méthode Agile
-                        </p>
-                        <p>
-                            <span>Developpement mobile</span> <br>
-                            Androïd
-                        </p>
-                        <p>
-                            <span>logiciels</span> <br>
-                            Notepad++ - Sublime text - Wamp/Lamp - Suite bureautique Libre Office
-                        </p>
-                    </div>
-                </div>
-                <h4 id="titre_rubrique_formation">Formations</h4>
-                <div class="row">
-                    <div id="rubrique_formation" class="col-lg-12">
-
-                        <div class="row">
-                            <div class="col-lg-3"><span>2015-2016 (1 an)</span></div>
-                            <p class="col-lg-9">Concepteur Développeur Informatique (Niveau II/BAC+4) à l’AFPA de Toulouse - Balma</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3"><span>2008-2009 (8 mois)</span></div>
-                            <p class="col-lg-9">Obtention du titre de Développeur Logiciel (Niveau III/BAC+2) à l’AFPA de Toulouse - Palays</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3"><span>2006 - 2008</span></div>
-                            <p class="col-lg-9">Premiere année d'IUT Statistique et Traitement Informatique des Données</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3"><span>2006</span></div>
-                            <p class="col-lg-9">Bac Scientifique option physique chimie</p>
-                        </div>
-                    </div>
-                </div>
-                <h4 id="titre_rubrique_experience">Experiences</h4>
-                <div class="row">
-                    <div id="rubrique_experience" class="col-lg-12">
-                        <h5 class="sous_rubrique_experience">En informatique</h5>
-                        <div class="row">
-                            <div class="col-lg-3 date_experience">2016 (3 mois)</div>
-                            <p class="col-lg-9">
-                                <span class="information_complementaire"><span class="fonction">Développeur - Symfony</span> - Conseil Départemental du Gers - Auch</span><br>
-                                Conception et Réalisation d'un logiciel de GPAO.<br>
-                                Modélisation de la base de données en utilisant la méthode Merise.<br>
-                                Modélisation de l'application en utilisant UML.<br>
-                                Codage de l'application en utilisant le framework Symfony 3. <br>
-                                <br>
-                            </p>
-                            <div class="col-lg-3 date_experience">2009 (3 mois)</div>
-                            <p class="col-lg-9">
-                                <span class="information_complementaire"><span class="fonction">Développeur</span> - AP Formation - TOULOUSE</span><br>
-                                Modélisation de l’application de gestion de QCM à partir du cahier des charges
-                                en utilisant UML.<br>
-                                Modélisation de la base de données en utilisant la méthode Merise.<br>
-                                Ecriture des scripts de création et de modificationet écriture des jeux
-                                de test en SQL pour la base de données MySQL.<br>
-                                <br>
-                            </p>
-                            <div class="col-lg-3 date_experience" >2008 (1 mois)</div>
-                            <p class="col-lg-9">
-                                <span class="information_complementaire"><span class="fonction">Développeur</span> - Collège les Fontanilles - Castelnaudary</span><br>
-                                Refonte du site internet en HTML/CSS.<br>
-                                <br>
-                            </p>
-                            <div class="col-lg-3 date_experience" >2007 (1 mois)</div>
-                            <p class="col-lg-9">
-                                <span class="information_complementaire"><span class="fonction">Développeur</span> - AMD Informatique - Carcassonne</span><br>
-                                Création d’un site internet en HTML/CSS pour une application de gestion d’évènement sportifs.<br>
-                                <br>
-                            </p>
-                        </div>
-
-                        <h5 class="sous_rubrique_experience">Autres Secteurs</h5>
-                        <div class="row">
-                            <div class="col-lg-3 date_experience">2011 - 2012 (7 mois)</div>
-                            <p class="col-lg-9">
-                                Equipier de station service chez Dyneff Arzens Nord<br>
-                                <br>
-                            </p>
-                            <div class="col-lg-3 date_experience">2011 (1 mois)</div>
-                            <p class="col-lg-9">
-                                Agent de blanchisserie chez Ellis Lanquedoc Roussillon<br>
-                                <br>
-                            </p>
-                            <div class="col-lg-3 date_experience">2010 (2 mois)</div>
-                            <p class="col-lg-9">
-                                Emploi saisonnier chez KWS France<br>
-                                <br>
-                            </p>
-                            <div class="col-lg-3 date_experience">2008 (1 mois)</div>
-                            <p class="col-lg-9">
-                                Employé du service technique à la Mairie d’Alairac<br>
-                                <br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </article>
 {% endblock %}

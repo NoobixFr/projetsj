@@ -5,11 +5,12 @@
 
 {# On redefini notre contenu #}
 {% block page_content %}
+
     <article id="showArticles">
         {% for article in articles_list %}
             <div class="row" >
-                <div class="col-xs-offset-1 col-xs-10">
-                    <div class="panel panel-info">
+                <div id="showArticles" class="col-xs-offset-1 col-xs-10">
+                    <article class="panel panel-info">
                         <div class="panel-heading">
                             <div class="text-center">
                                 <div class="row">
@@ -44,13 +45,14 @@
                                     {% endfor %}
                                 </div>
                                 <div class="col-xs-6 text-right">
-                                    <a href="{{ path("show_article", { 'id': article.id }) }}">En savoir plus <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="{{ path("show_article", { 'id': article.id }) }}">Voir les commentaires <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         {% endfor %}
     </article>
+
 {% endblock %}

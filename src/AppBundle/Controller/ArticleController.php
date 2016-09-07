@@ -25,7 +25,7 @@ class ArticleController  extends Controller
 
     /**
      * Affiche la page d'accueil du site qui contient la liste des articles.
-     * @Route("/", name="show_articles")
+     * @Route("/", name="home")
      */
     public function showArticlesAction()
     {

@@ -7,17 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class StaticController extends Controller
 {
-    /**
-     * @Route("/", name="home")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction()
-    {
-        return $this->render('::base.html.twig');
-    }
 
     /**
-     * * @Route("/bootstrap-memo", name="bootstrap_memo")
+     * Affiche la page du memento bootstrap
+     * @Route("/bootstrap-memo", name="bootstrap_memo")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showBootStrapMemoAction(){
@@ -26,6 +19,7 @@ class StaticController extends Controller
     }
 
     /**
+     * Affiche la page du cv au format HTML
      * @Route("/cv", name="cv")
      */
     public function showCvAction(){
@@ -33,6 +27,8 @@ class StaticController extends Controller
     }
 
     /**
+     * Affiche le pdf du cv.
+     * le pdf se trouve dans le dossier : web/documents/DUFRESNE_Jonathan_cv.pdf
      * @Route("/cv/pdf", name="cv_pdf")
      */
     public function showCvPdfAction(){

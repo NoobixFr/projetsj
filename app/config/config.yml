@@ -2,26 +2,11 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@UserBundle/Resources/config/services.yml" }
-    - { resource: "@BackendBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    meteo.city: Toulouse # Paramètrage de la ville pour le widget de la meteo
-
-services:
-    # Permet d'utiliser truncate et wordwrap sur les variable text twig
-    twig.extension.text:
-       class: Twig_Extensions_Extension_Text
-       tags:
-            - { name: twig.extension }
-    # Permet de localiser la date avec les extension twig
-    twig.extension.intl:
-        class: Twig_Extensions_Extension_Intl
-        tags:
-            - { name: twig.extension }
 
 framework:
     #esi:             ~
@@ -59,13 +44,13 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
+        driver:   pdo_mysql
         host:     "%database_host%"
         port:     "%database_port%"
         dbname:   "%database_name%"
         user:     "%database_user%"
         password: "%database_password%"
-        charset:  "%database_charset%"
+        charset:  UTF8
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -89,7 +74,7 @@ assetic:
             formatter: 'Leafo\ScssPhp\Formatter\Compressed'
         jsqueeze: ~
         cssrewrite: ~
-        
+
 # Configuration de ckeditor
 ivory_ck_editor:
     default_config:                     my_custom_config    # Utiliser par defaut la configuration my_custom_config

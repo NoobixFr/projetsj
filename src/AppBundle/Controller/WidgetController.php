@@ -1,28 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Noobix
- * Date: 20/06/2016
- * Time: 10:58
- */
+// src/AppBundle/Controller/WidgetController.php
 
 namespace AppBundle\Controller;
 
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class WidgetController extends Controller
 {
-    
+    /**
+     * Permet de récupérer la météo de la ville configuré dans le fichier de app/config/config.yml
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function widgetMeteoAction(){
-
         $url = "http://www.prevision-meteo.ch/services/json/". $this->getParameter('meteo.city');
-        if(file_exists($url)){
-            $content = file_get_contents(file_get_contents($url));
-        }else{
-            $content = false;
-        }
+
+        $content = @file_get_contents($url);
 
         return $this->render("widget/meteo.html.twig",
             array(

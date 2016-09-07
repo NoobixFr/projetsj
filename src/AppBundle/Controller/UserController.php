@@ -25,6 +25,7 @@ class UserController extends Controller
         }
 
         $authenticationUtils = $this->get('security.authentication_utils');
+        dump($authenticationUtils->getLastAuthenticationError());
 
         return $this->render(':user:connexion.html.twig', array(
             'last_username' => $authenticationUtils->getLastUsername(),
